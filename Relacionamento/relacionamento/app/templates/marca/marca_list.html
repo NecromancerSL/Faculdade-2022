@@ -32,17 +32,17 @@
             <a href="#">Ver produtos</a>
           </td>
           <td>
-            <a href="#">Editar produtos</a>
+            <a href="{% url 'marca_edit' pk=marca.pk%}">Editar produtos</a>
           </td>
           <td>
-            <a href="#">Apagar produtos</a>
+            <a href="{% url 'marca_remove' pk=marca.pk%}">Apagar produtos</a>
           </td>
         </tr>
         {% endfor %}
         </tbody>
       </table>
 
-        <a href="#">
+        <a href="{% url 'cadastrar_marca' %}">
           <button type="submit" class="btn btn-primary">Cadastrar</button>
         </a>
 

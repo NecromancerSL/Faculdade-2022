@@ -13,11 +13,11 @@ public class IncluiPessoaAluno {
         //p.setDataNasc(dataP.getTime());
 
         Aluno a = new Aluno();
-        a.setNome("Augusto");
+        a.setNome("Gustavo Nunes");
         GregorianCalendar dataA = new GregorianCalendar(2002, Calendar.JANUARY, 24);
         a.setDataNasc(dataA.getTime());
-        a.setRa(133);
-        a.setTurma("Direito");
+        a.setRa(2058);
+        a.setTurma("ADS");
         //a.setMensalidade(new BigDecimal(123.45));
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("eduvale_pu");
         EntityManager em = emf.createEntityManager();

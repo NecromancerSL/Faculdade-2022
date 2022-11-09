@@ -1,6 +1,9 @@
 package entity;
 
 import javax.persistence.*;
+import java.io.*;
+import java.util.Date;
+
 
 @NamedQueries ( {
         @NamedQuery (name = "buscaPorRA",
@@ -29,5 +32,20 @@ public class Aluno extends Pessoa {
     public void setRa(int ra) {
         this.ra = ra;
     }
+
+    @PostPersist
+    void gravaLog() {
+        try {
+            // Cria arquivo na pasta raiz do projeto
+            FileOutputStream fos = new FileOutputStream("log.txt", true);
+            String linha = "Aluno " + getNome()
+                    + " gravado em " + new Date() + "\n";
+            fos.write(linha.getBytes());
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
 
