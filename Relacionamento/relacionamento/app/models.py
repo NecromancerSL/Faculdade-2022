@@ -1,7 +1,9 @@
 from django.db import models
 
 class Marca(models.Model):
-    nome = models.CharField(max_length=20, null=False)
+    nome = models.CharField(max_length=50, null=False)
+    def __str__(self):
+        return self.nome
 
 class Produto(models.Model):
     descricao = models.CharField(max_length=50, null=False)

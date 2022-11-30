@@ -30,12 +30,12 @@ def listar_marca(request, template_name="marca/marca_list.html"):
     return render(request, template_name, marcas)
 
 
-def marca_remove(request, pk):
+def marca_remove(request, pk, templeta_name='marca/marca_delete.html',):
     marca = Marca.objects.get(pk=pk)
     if request.method == "POST":
         marca.delete()
         return redirect("listar_marca")
-    return render(request, 'marca/marca_delete.html', {'marca': marca})
+    return render(request, templeta_name , {'marca': marca})
 
 
 def marca_edit(request, pk, template_name='marca/marca_form.html'):
@@ -48,3 +48,7 @@ def marca_edit(request, pk, template_name='marca/marca_form.html'):
         else:
             form = MarcaForm(instance=marca)
     return render(request, template_name, {'form': form})
+
+def listar_produtos_marca(request, pk, template_name="marca/marca_produtos_list"):
+    produtos = Produto.objects.filter(marca=pk)
+    return render(request, template_name, {'produtos': produtos})
