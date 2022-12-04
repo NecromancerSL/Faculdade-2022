@@ -52,3 +52,19 @@ def marca_edit(request, pk, template_name='marca/marca_form.html'):
 def listar_produtos_marca(request, pk, template_name="marca/marca_produtos_list"):
     produtos = Produto.objects.filter(marca=pk)
     return render(request, template_name, {'produtos': produtos})
+
+def cadastrar_produto(request, template_name="produto/produto_form.html"):
+    form = ProdutoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('listar_produto')
+    return render(request, template_name, {'form': form})
+
+def listar_produto(request, template_name="produto/produto_list.html"):
+    query = request.GET.get("busca")
+    if query:
+        produto = Produto.objects.filter(nome__iexact=query)
+    else:
+        produto = Produto.objects.all
+    produtos = {'lista': produto}
+    return render(request, template_name, produtos)
