@@ -45,8 +45,8 @@ def marca_edit(request, pk, template_name='marca/marca_form.html'):
         if form.is_valid():
             form.save()
             return redirect('listar_marca')
-        else:
-            form = MarcaForm(instance=marca)
+    else:
+        form = MarcaForm(instance=marca)
     return render(request, template_name, {'form': form})
 
 def listar_produtos_marca(request, pk, template_name="marca/marca_produtos_list"):
@@ -68,3 +68,21 @@ def listar_produto(request, template_name="produto/produto_list.html"):
         produto = Produto.objects.all
     produtos = {'lista': produto}
     return render(request, template_name, produtos)
+
+def produto_remove(request, pk, templeta_name='produto/produto_delete.html',):
+    produto = Produto.objects.get(pk=pk)
+    if request.method == "POST":
+        produto.delete()
+        return redirect("listar_produto")
+    return render(request, templeta_name, {'produto': produto})
+
+def produto_edit(request, pk, template_name='produto/produto_form.html'):
+    produto = get_object_or_404(Produto, pk=pk)
+    if request.method == "POST":
+        form = ProdutoForm(request.POST, instance=produto)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_produto')
+    else:
+        form = ProdutoForm(instance=produto)
+    return render(request, template_name, {'form': form})

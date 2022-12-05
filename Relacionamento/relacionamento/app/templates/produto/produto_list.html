@@ -29,12 +29,14 @@
         <tbody>
         {% for produto in lista %}
         <tr>
-          <td>{{produto.nome}}</td>
+          <td>{{produto.descricao}}</td>
+          <td>{{produto.preco}}</td>
+          <td>{{produto.marca}}</td>
           <td>
-            <a href="#">Editar produtos</a>
+            <a href="{% url 'produto_edit' pk=produto.pk%}">Editar produtos</a>
           </td>
           <td>
-            <a href="#">Apagar produtos</a>
+            <a href="{% url 'produto_remove' pk=produto.pk%}">Apagar produtos</a>
           </td>
         </tr>
         {% endfor %}
